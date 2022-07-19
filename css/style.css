@@ -1,0 +1,190 @@
+* {
+    box-sizing: border-box;
+    margin: auto;
+}
+
+body {
+    line-height: 1.2;
+    color: #b1bf5a !important;
+    font-family: 'Play' !important;
+    font-size: 100% !important;
+    background-color: #6a3e1e !important;
+    background-position: 0 100% !important;
+    background-repeat: repeat !important;
+    background-image: url(../images/back.jpg) !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+}
+
+/* ------------- Верхнее меню ------------ */
+.topnav {
+    display: grid;
+    width: 100%;
+    grid-template-columns: auto max-content 50px;
+    grid-template-rows: 30px;
+    padding: 3px;
+    margin: 0;
+    background-color: #333;
+    font-family: 'Roboto', sans-serif;
+}
+
+.page_title {
+    font-size: large;
+    font-weight: 600;
+}
+
+.topnav a {
+    float: right;
+    display: block;
+    color: #b1bf5a;
+    text-align: right;
+    padding: 2px 16px;
+    text-decoration: none;
+}
+
+.user_name {
+    display: block;
+    float: right;
+    min-width: min-content;
+}
+
+.topnav a:hover {
+    background-color: #584333;
+    color: #f5d627;
+}
+
+.top_menu_btn {
+    display: block;
+    float: right;
+    margin: 1px 1px;
+}
+
+.dropbtn {
+    display: block;
+    float: left;
+    margin: 3px auto;
+    padding: 0;
+    background: black;
+}
+
+.barbtn {
+    cursor: pointer;
+}
+
+.dropbtn:hover {
+    background-color: #dd9a0a;
+    color: black;
+}
+
+/* --------- Выпадающее меню (скрыто по умолчанию) ----------- */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 3px;
+    /*background-color: #6a3e1e55;*/
+    /*transparent;*/
+    /*#dd9a0a;*/
+    /*#f1f1f1;*/
+    min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.356);
+    z-index: 1;
+    padding: 20px 3px 10px 20px;
+    margin: 2px;
+    font-family: 'Roboto', sans-serif;
+    border: #946c15 1px solid;
+    border-radius: 5px;
+}
+
+/* на мальненьких экранах уменьшаем прозрачность, т.к. меню поверх текста */
+@media (max-width: 768px) {
+    .dropdown-content {
+        background-color: #6a3e1edd;
+    }
+}
+
+@media (min-width: 769px) {
+    .dropdown-content {
+        background-color: #6a3e1e55;
+    }
+}
+
+/* с помощью JS,добавляем этот класс к .dropdown-content, когда пользователь нажимает на кнопку выпадающего списка */
+.show {
+    display: block;
+}
+
+.widget-title {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #eeba49;
+    /*#222;*/
+    font-size: 16px;
+    padding-left: 5px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-left: 2px solid #eec366;
+    /*#b99d61;*/
+}
+
+.widget-list {
+    padding: 5px;
+    list-style: none;
+}
+
+.dropdown-content p {
+    padding: 10px;
+}
+
+.widget-list a:before {
+    content: "\2014";
+    margin-right: 14px;
+}
+
+.widget-list a {
+    text-decoration: none;
+    outline: none;
+    display: block;
+    padding: 6px 0;
+    /*margin: 5px 0;*/
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #c4cc87;
+    /*#444;*/
+    /*transition: .3s linear;*/
+    transition: all 0.3s ease;
+}
+
+.widget-list a:hover {
+    color: #dd9a0a;
+    padding-left: 15px;
+    font-size: 17 px;
+    font-weight: 700;
+}
+
+.widget-list a:hover::before {
+    content: "+ ";
+    /*position: absolute;
+    left: 5px;
+    top: 30px;
+    margin-left: 2px; */
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.login-form {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 50px 50px 100px;
+    background-color: #6a3e1e;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.356);
+    padding: 20px 20px 10px 20px;
+    margin: auto;
+    font-family: 'Roboto', sans-serif;
+    border: #946c15 1px solid;
+    border-radius: 5px;
+    width: 560px;
+}
