@@ -1,13 +1,12 @@
 <?php
 
 require_once 'config.php';
-session_start();
 
 // возвращает массив - список пользователей
 function getUsersList($reload)
 {
 
-    if (!key_exists('users', $_SESSION)) {
+    if (!key_exists('users', $_SESSION) && !$reload) {
         return [];
     }
     if ($_SESSION['users'] && !$reload) {
@@ -65,6 +64,9 @@ function addUser($login, $password)
     // если такого пользователя не было ранее - сохраним его в файл
     if (!$userExists) {
         saveUsersList();
+        // запишем время регистрации (используется для предложение подарочной акции в течении 24 часов после регистрации)
+        //$_COOKIE['reg_time'] = time();
+        setcookie('reg_time', time(), time() + 86400, '/');
     }
     return true;
 }
@@ -88,8 +90,10 @@ function changeUserPassword($login, $newPassword)
 // возвращает: true-успешно, false-не успешно
 function loginUser($login, $password)
 {
-    $users = getUsersList(false);
+    $users = getUsersList(true);
+    
     $userExists = existsUser($login);
+
     if (!$userExists) {
         return false;
     }
