@@ -5,7 +5,7 @@
 
 **Website of the SPA-salon "Golden Lotus"**
 
-# Implemented:
+### Implemented:
 
 1. Developed the main page of the site. Photos, services, promotions of the salon are posted;
 2. Made registration and login forms on the site, made it possible to log in and out (link - in the header and in the "hamburger" menu);
