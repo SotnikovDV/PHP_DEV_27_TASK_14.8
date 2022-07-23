@@ -21,12 +21,12 @@
 
     ?>
     <main>
-        <div class="login-box">
+        <div class="input-box login-box">
             <div class="login-box-title">Регистрация</div>
             <div class="login-box-note">Или <a href="login.php">войдите</a>, если Вы уже регистрировались</div>
             <form action="auth.php" method="post" class="login-form">
                 <label for="login">Имя пользователя:</label>
-                <input name="login" type="text" placeholder="..." class="inpt" value="<?= (key_exists('login', $_REQUEST)) ? $_REQUEST['login']: null ?>">
+                <input name="login" type="text" placeholder="..." class="inpt" value="<?= (key_exists('login', $_REQUEST)) ? $_REQUEST['login'] : null ?>">
                 <label for="password">Пароль:</label>
                 <input name="password" type="password" placeholder="..." class="inpt">
                 <input name="register" type="hidden" value="1">

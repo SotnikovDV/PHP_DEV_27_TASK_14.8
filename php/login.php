@@ -18,32 +18,32 @@
     session_start();
     include_once 'user.php';
     include_once 'head.php';
-    
+
     ?>
     <main>
-        <div class="login-box">
-        <div class="login-box-title">Вход</div>    
-        <?php
-            if (key_exists('error', $_REQUEST)){
-        ?>
-        <div class="login-box-error">Вы ввели неравильный пароль.  Попробуйте еще раз</div>    
-        <?php
+        <div class="input-box login-box">
+            <div class="login-box-title">Вход</div>
+            <?php
+            if (key_exists('error', $_REQUEST)) {
+            ?>
+                <div class="login-box-error">Вы ввели неравильный пароль. Попробуйте еще раз</div>
+            <?php
             } else {
-        ?>
-        <div class="login-box-note">Или <a href="register.php">зарегистрируйтесь</a>, что бы получать скидки и подарки :)</div>    
-        <?php
+            ?>
+                <div class="login-box-note">Или <a href="register.php">зарегистрируйтесь</a>, что бы получать скидки и подарки :)</div>
+            <?php
             }
-        ?>
-        <form action="auth.php" method="post" class="login-form">
-            <label for="login">Имя пользователя:</label>
-            <input name="login" type="text" placeholder="..." class="inpt">
-            <label for="password">Пароль:</label>
-            <input name="password" type="password" placeholder="..." class="inpt">
-            <input name="submit" type="submit" value="Войти" class="btn">
-            <input name="button" type="button" value="Отмена" onclick="location='/'" class="btn">
-        </form>
+            ?>
+            <form action="auth.php" method="post" class="login-form">
+                <label for="login">Имя пользователя:</label>
+                <input name="login" type="text" placeholder="..." class="inpt">
+                <label for="password">Пароль:</label>
+                <input name="password" type="password" placeholder="..." class="inpt">
+                <input name="submit" type="submit" value="Войти" class="btn">
+                <input name="button" type="button" value="Отмена" onclick="location='/'" class="btn">
+            </form>
         </div>
-</main>
+    </main>
 </body>
 
 </html>

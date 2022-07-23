@@ -118,13 +118,11 @@ main {
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #eeba49;
-    /*#222;*/
     font-size: 16px;
     padding-left: 5px;
     margin-top: 15px;
     margin-bottom: 10px;
     border-left: 2px solid #eec366;
-    /*#b99d61;*/
 }
 
 .widget-list {
@@ -146,13 +144,10 @@ main {
     outline: none;
     display: block;
     padding: 6px 0;
-    /*margin: 5px 0;*/
     letter-spacing: 1px;
     font-size: 16px;
     font-weight: 400;
     color: #c4cc87;
-    /*#444;*/
-    /*transition: .3s linear;*/
     transition: all 0.3s ease;
 }
 
@@ -169,7 +164,7 @@ main {
 }
 
 /* ----------------- Форма регистрация/Входа ---------------- */
-.login-box {
+.input-box {
     display: block;
     background-color: #6a3e1e;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.356);
@@ -179,7 +174,14 @@ main {
     border: #946c15 1px solid;
     border-radius: 5px;
     max-width: 480px;
-    /*width: 90%;*/
+}
+
+.login-box {
+    max-width: 480px;
+}
+
+.profile-box {
+    max-width: 680px;
 }
 
 .login-box-title {
@@ -187,7 +189,6 @@ main {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     font-size: 18pt;
-    /*font-weight: 700;*/
     color: #333;
     padding: 7px 0 7px 20px;
 }
@@ -226,7 +227,7 @@ main {
 .login-form {
     display: grid;
     grid-template-columns: 45% 55%;
-    grid-template-rows: 60px 60px 60px;
+    grid-auto-rows: 60px;
     padding: 20px 20px 10px 40px;
     margin: auto;
 }
@@ -246,12 +247,8 @@ main {
 .login-form>label {
     margin: 0;
     width: 90%;
-    /*padding-right: 0px;
-    line-height: 18px;
-    font-weight: normal;*/
     padding: 10px 0;
     vertical-align: bottom;
-    /*background: transparent;*/
     font-size: 95%;
     color: #dd9a0a;
 }
@@ -287,6 +284,17 @@ main {
     vertical-align: baseline;
 }
 
+.content-block a {
+    text-decoration: none;
+    text-transform: none;
+    font-weight: 600;
+    color: #cddd63;
+}
+
+.content-block a:hover {
+    color: #e2ff07;
+}
+
 .main-header {
     font-family: 'Roboto', sans-serif;
     display: flex;
@@ -300,8 +308,10 @@ main {
 
 .content {
     display: flex;
-    margin: 10px 0;
+    /*margin: 10px 0;*/
+    justify-content: space-between;
     align-items: flex-start;
+    margin: -10px;
 }
 
 /* на мальненьких экранах уменьшаем прозрачность, т.к. меню поверх текста */
@@ -319,11 +329,10 @@ main {
 
 .side-content {
     flex: 1;
-    /*align-self: flex-start;*/
     margin: 0;
-    /*display: flex;*/
     flex-direction: column;
     padding: 20px;
+    margin: 10px;
     text-align: left;
 }
 
@@ -351,7 +360,7 @@ main {
     display: flex;
     flex-direction: column;
     padding: 0;
-    margin: 0 0 0 20px;
+    margin: 10px;
     min-height: 380px;
 }
 
@@ -361,21 +370,23 @@ main {
     padding: 15px;
     position: relative;
 }
+
 .slide-text {
     left: 0px;
-    margin: 15px; 
+    margin: 15px;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.5);
-    /*min-width: 100%;*/
     min-height: 50px;
     color: #d6ee25;
     padding: 10px;
     z-index: 100;
     box-sizing: border-box;
 }
+
 .text-top {
     top: 0px;
 }
+
 .text-bottom {
     bottom: 0px;
 }

@@ -27,16 +27,16 @@ $login = getCurrentUser();
     <h3 class="widget-title">Услуги</h3>
     <ul class="widget-list">
         <li><a href="/">Релакс</a></li>
-        <li><a href="/php/monitor.php">Оздоровление</a></li>
-        <li><a href="/php/orders.php">Красота</a></li>
-        <li><a href="/php/dicts.php">Акции</a></li>
-        <li><a href="/php/config.php">Магазин</a></li>
+        <li><a href="/">Оздоровление</a></li>
+        <li><a href="/">Красота</a></li>
+        <li><a href="/">Акции</a></li>
+        <li><a href="/">Магазин</a></li>
     </ul>
     <p></p>
     <h3 class="widget-title">О нас</h3>
     <ul class="widget-list">
-        <li><a href="/php/points.php">Салоны</a></li>
-        <li><a href="/php/license.php">Лицензии</a></li>
+        <li><a href="/">Салоны</a></li>
+        <li><a href="/">Лицензии</a></li>
     </ul>
     <p></p>
     <h3 class="widget-title">О Вас</h3>

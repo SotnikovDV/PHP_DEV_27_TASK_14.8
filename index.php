@@ -19,9 +19,26 @@
     session_start();
     include_once 'php/user.php';
     include_once 'php/head.php';
-    // Если ползователь залогинился - покажем подарочную акцию для него
-    var_dump($_COOKIE);
-    echo '<br>';
+
+    // Если ползователь залогинился - настроем страницу под него
+    $login = getCurrentUser();
+    $regdate = getUserRegDate() * 1;
+    // $fullname = getUserFullName($login);  // пока не нужно
+    // считаем кол-во дней до дня рождения
+    $birthday = getUserBirthday($login);
+    if ($birthday) {
+        $dbd = getdate(strtotime($birthday));
+        $dn = getdate();
+        if ($dn['yday'] > $dbd['yday']) {
+            // лениво делать с учетом високосного года
+            $bdDayCount = 365 - ($dn['yday'] - $dbd['yday']);
+        } else {
+            $bdDayCount = $dbd['yday'] - $dn['yday'];
+        }
+    } else {
+        $bdDayCount = null;
+    }
+
     ?>
     <main>
         <div class="page-content">
@@ -30,8 +47,8 @@
                     <img src="images/lotos-12.png">
                 </div>
                 <div style="flex: 2; margin-left: 20px"" >
-                    <p><strong><span style=" font-size: x-large; color: #adad14;">7(999)777-66-55</span></strong></p>
-                    <p><strong><span style="font-size: x-large; color: #adad14;">7(888)666-55-44</span></strong></p>
+                    <p><strong><span style=" font-size: x-large; color: #adad14;">+7(999)777-66-55</span></strong></p>
+                    <p><strong><span style="font-size: x-large; color: #adad14;">+7(888)666-55-44</span></strong></p>
                     <p></p>
                     <p><span style="color: #adad14; font-size: medium;"><strong>с 10 утра и до последнего вздоха</strong></span></p>
                     <p>+7 (123) 333-44-22 м.ВДНХ</p>
@@ -60,38 +77,47 @@
                     <a class="side-content-item" href="/">Все услуги</a>
                     <a class="side-content-item" href="/">Подарочные сертификаты</a>
                 </div>
-                <script>
-                    // если в cookie записана дата регистрация на сайте и еще не прошло 24 часа - предложим акцию
-                    if (checkCookieEnabled()) {
-                        if (document.cookie.indexOf('reg_time=') != -1) {
-                            let cookieUserReg = getCookie('reg_time');
-                            let tsUserReg = cookieUserReg * 1000;
-                            tsUserReg += 24 * 3600 * 1000;
-                            let timeUseReg = new Date(tsUserReg);
-                            //alert(timeUseReg);
-                            window.setInterval(function() {
-                                let now = new Date();
-                                let actTime = new Date(tsUserReg - now);
-                                let clock = document.getElementById("act_time");
-                                clock.innerHTML = actTime.getDay() + ' дней ' + actTime.getHours() + ' часов ' + actTime.getMinutes() + ' минут ' + actTime.getSeconds() + ' секунд ';
-                            }, 1000);
-                        } else {
-                            console.log('Время регистрации не установлено');
-                        }
-                    } else {
-                        console.log('Coockie не доступны');
-                    }
-                </script>
                 <div class="main-content ">
-                    <div id="action_content" class="main-content-item content-block">
-                        <h2>Подарочный сертификат каждому новому клиенту </h2><br>
+                    <div id="action_content" class="main-content-item content-block" style="display: none;">
+                        <h2 style="text-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);">Скидка каждому новому клиенту - foot-массаж за половину стоимости</h2><br>
                         <hr>
-                        <img src="images/actionl.png" alt="Подарочный сертификат" style="width: 100%;">
+                        <img src="images/foot.jpg" alt="Акция для новых клиентов" style="width: 100%;">
                         <div class="slide-text text-bottom">
-                            <span style="font-size: 16px;">СПА программа на выбор. Для активации сертификата свяжитесь с администратором любого нашего салона в течении <span id="act_time">0 часов 5 минут 10 секунд</span>
+                            <span style="font-size: 16px;">Что бы воспользоваться скидкой, свяжитесь с администратором любого нашего салона в течении <span id="act_time">0 часов 5 минут 10 секунд</span>
                             </span>
                         </div>
                     </div>
+                    <?php // Если пользователь залогинился, но ДР не указал в профиле - напомним ему
+                    if ($login && !$birthday) { ?>
+                        <div id="set_birthday" class="main-content-item content-block">
+                            <img src="images/birthday.jpg" alt="День рождения" style="width: 100%;">
+                            <div class="slide-text text-top">
+                                <span style="font-size: 16px;">Укажите <a href="php/profile.php">дату рождения в своем профиле</a> и мы, с удовольствием, сделаем Вам подарок на День рождения!</span>
+                                </span>
+                            </div>
+                        </div>
+                    <?php  }
+
+                    // если сегодня ДР у клиента, сделаем ему подарок:
+                    if ($login && !is_null($bdDayCount) && ($bdDayCount === 0)) {
+                    ?>
+                        <div id="birthday_content" class="main-content-item content-block">
+                            <h2>Поздравляем с Днем рождения!</h2><br>
+                            <hr>
+                            <img src="images/actionl.png" alt="Подарочный сертификат" style="width: 100%;">
+                            <div class="slide-text text-bottom">
+                                <span style="font-size: 16px;">Ваш подарок - СПА программа на выбор. Для активации сертификата свяжитесь с администратором любого нашего салона в течении недели со дня рождения</span>
+                                </span>
+                            </div>
+                        </div>
+                    <?php } elseif ($login && $bdDayCount) // если до дня рождения еще далеко
+                    {
+                    ?>
+                        <div class="main-content-item content-block">
+                            До Вашего Дня рождения еще
+                            <?= $bdDayCount ?> дн.
+                        </div>
+                    <?php } ?>
                     <div class="main-content-item content-block">
                         <img src="images/new.jpg" alt="Новые услуги" style="width: 100%;">
                         <div class="slide-text text-top">
@@ -109,6 +135,29 @@
                     </div>
                 </div>
             </div>
+
+            <script>
+                // если пользователь залогинен и есть дата регистрации на сайте - выведем акцию
+                let actionContent = document.querySelector('#action_content');
+                let clock = document.querySelector('#act_time');
+
+                let userRegDate = <?= $regdate ?>;
+                userRegDate += 24 * 3600;
+
+                if ((Date.now() / 1000) < userRegDate) {
+
+                    window.setInterval(function() {
+                        let actTime = userRegDate - Date.now() / 1000;
+                        let hours = Math.trunc(actTime / 3600);
+                        let minutes = Math.trunc((actTime - hours * 3600) / 60);
+                        let seconds = Math.trunc(actTime - hours * 3600 - minutes * 60);
+                        clock.innerHTML = hours + ' ч. ' + minutes + ' мин. ' + seconds + ' сек.';
+                    }, 1000);
+                    actionContent.style.display = '';
+                } else {
+                    actionContent.style.display = 'none';
+                }
+            </script>
 
             <div class="footer content-block">
                 <div class="links">
